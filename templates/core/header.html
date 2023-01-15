@@ -1,0 +1,44 @@
+<header class="header">
+    <a class="header__logo" href="/">
+        <picture>
+            <img height="32" alt="univ nanterre logo"
+                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Logo_Universit%C3%A9_Paris-Nanterre.svg/1280px-Logo_Universit%C3%A9_Paris-Nanterre.svg.png">
+        </picture>
+        <p class="header__title">Stocky</p>
+    </a>
+    <nav role="navigation" class="header__nav">
+        <ul>
+            <li>
+                {% if not user.is_authenticated %}
+                    <a href="{% url 'login' %}">login</a>
+                    <a href="{% url 'signup' %}">signup</a>
+                {% else %}
+                    <a href="{% url 'logout' %}">logout</a>
+                {% endif %}
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<style>
+    .header {
+        padding: 0.5rem 1rem;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .header__logo {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .header__title {
+        font-size: 1rem;
+        font-weight: bold;
+    }
+
+    .header__nav {
+
+    }
+</style>

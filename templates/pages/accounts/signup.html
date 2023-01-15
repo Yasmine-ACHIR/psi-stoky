@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block main %}
+    signup
+
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        {{ form.errors }}
+
+        <input type="submit">
+    </form>
+
+    <style>
+        form {
+            display: grid;
+        }
+
+        form > * {
+            display: grid;
+        }
+    </style>
+
+{% endblock %}

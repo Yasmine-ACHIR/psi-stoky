@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{% static 'articles/articles.css' %}">
+
+{% endblock %}
+
+{% block main %}
+    <section class="articles-page">
+        <h1>Articles List</h1>
+        <a class="article_actions" href="{% url 'add_article' %}">
+            <button class="add">Add article</button>
+        </a>
+        <ul class="article__container">
+            {% for article in articles %}
+                <a href="{% url 'article_details' article.id %}">
+
+                    <article class="article">
+                        <picture>
+                            <img class="article__image" src="{{ article.image.url }}" alt="{{ article.name }}">
+                        </picture>
+                        <section class="article__content">
+                            <div>
+                                <h2 class="article__name">{{ article.name }}</h2>
+                                <i>{{ article.serial_number }}</i>
+                            </div>
+                            <h1 class="article_details__price">{{ article.price }} €</h1>
+                            <p>Quantity: {{ article.quantity }}</p>
+                            <p>Categories:
+                                {% for category in article.categories.all %}
+                                    {{ category.name }}{% if not forloop.last %}, {% endif %}
+                                {% endfor %}
+                            </p>
+                        </section>
+
+                    </article>
+                </a>
+            {% endfor %}
+        </ul>
+    </section>
+{% endblock %}

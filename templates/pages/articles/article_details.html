@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{% static 'articles/articles.css' %}">
+{% endblock %}
+
+{% block main %}
+    <article class="details-details">
+        <img class="details-details__image" src="{{ article.image.url }}" alt="{{ article.name }}">
+        <div class="details-details_content">
+            <div>
+                <h1 class="details-details__name">{{ article.name }}</h1>
+                <i>{{ article.serial_number }}</i>
+            </div>
+            <p class="details-details__price">{{ article.price }} <span>€</span></p>
+            <p>Categories:
+                {% for category in article.categories.all %}
+                    {{ category.name }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </p>
+            <div class="details-details__quantity">
+                <p>{{ article.quantity }}</p>
+                <label> articles disponible </label>
+            </div>
+            <div class="details-details__description">
+                <label>Description</label>
+                <p>{{ article.description }}</p>
+            </div>
+            <div class="article_actions">
+                <a href="{% url 'delete_article' article.pk %}">
+                    <button class="delete">Delete</button>
+                </a>
+                <a href="{% url 'edit_article' article.pk %}">
+                    <button class="edit">Edit</button>
+                </a>
+            </div>
+        </div>
+    </article>
+{% endblock %}

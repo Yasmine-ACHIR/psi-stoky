@@ -1,12 +1,18 @@
 @import "layout.css";
 
+:root {
+    --text-color: #111;
+}
+
+
 *,
 *::after,
 *::before {
     margin: 0;
     padding: 0;
-    font-size: 16px;
     box-sizing: border-box;
+    color: var(--text-color);
+    font-family: "Sofia Sans", serif;
 }
 
 ul, ol {
@@ -15,4 +21,37 @@ ul, ol {
 
 a {
     text-decoration: none;
+    cursor: pointer;
+}
+
+a:visited {
+    color: black !important;
+}
+
+
+img {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+form {
+    margin: auto;
+    max-width: 1000px;
+    display: grid;
+    gap: 1rem;
+}
+form > p {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    padding: .5rem .2rem;
+}
+
+input[type='submit'] {
+    cursor: pointer;
+    background: #f4f4f4;
+    border: #c1c1c1 1px solid;
+    border-radius: .2rem;
 }

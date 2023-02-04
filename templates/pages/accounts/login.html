@@ -1,14 +1,19 @@
 {% extends 'base.html' %}
+{% load static %}
 
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{% static 'accounts/accounts.css' %}">
+{% endblock %}
 {% block main %}
 
-    <h1>Login</h1>
-    {% if form.errors %}
-        <p>Your username and password didn't match. Please try again.</p>
-    {% endif %}
+    <div class="accounts">
+        <h1>Login</h1>
+        {% if form.errors %}
+            <p>Your username and password didn't match. Please try again.</p>
+        {% endif %}
 
-    {% if next %}
-        {% if user.is_authenticated %}
+        {% if next %}
+            {% if user.is_authenticated %}
             <p>Your account doesn't have access to this page. To proceed,
                 please login with an account that has access.</p>
         {% else %}
@@ -19,8 +24,12 @@
     <form method="post" action="{% url 'login' %}">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="login">
+        <input class="btn" type="submit" value="login">
         <input type="hidden" name="next" value="{{ next }}">
     </form>
+        <div class="accounts__footer">
+            or <a href="{% url 'signup' %}">Signup</a>
+        </div>
+    </div>
 
 {% endblock %}

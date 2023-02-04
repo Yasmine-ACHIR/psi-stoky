@@ -7,30 +7,41 @@
 
 {% block main %}
     <section class="articles-page">
-        <h1>Articles List</h1>
-        <a class="article_actions" href="{% url 'add_article' %}">
-            <button class="add">Add article</button>
-        </a>
+        <h1>Les Articles</h1>
+
+        <fieldset class="input__container">
+            <legend>
+                <label for="article_filter">Filtrer les articles</label>
+            </legend>
+            <input placeholder="search article" id="article_filter" type="search">
+        </fieldset>
         <ul class="article__container">
+            <a class="add-article" href="{% url 'add_article' %}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                    <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/>
+                </svg>
+                Add article
+            </a>
             {% for article in articles %}
                 <a href="{% url 'article_details' article.id %}">
-
                     <article class="article">
                         <picture>
                             <img class="article__image" src="{{ article.image.url }}" alt="{{ article.name }}">
                         </picture>
                         <section class="article__content">
+                            <div class="article__categories">
+                                <p>{{ article.supplier }}</p>
+                                <p>
+                                    {% for category in article.categories.all %}
+                                        {{ category.name }}{% if not forloop.last %}, {% endif %}
+                                    {% endfor %}
+                                </p>
+                            </div>
                             <div>
                                 <h2 class="article__name">{{ article.name }}</h2>
-                                <i>{{ article.serial_number }}</i>
                             </div>
-                            <h1 class="article_details__price">{{ article.price }} €</h1>
+                            <h1 class="article__price">{{ article.price }} €</h1>
                             <p>Quantity: {{ article.quantity }}</p>
-                            <p>Categories:
-                                {% for category in article.categories.all %}
-                                    {{ category.name }}{% if not forloop.last %}, {% endif %}
-                                {% endfor %}
-                            </p>
                         </section>
 
                     </article>
@@ -38,4 +49,28 @@
             {% endfor %}
         </ul>
     </section>
+
+    {% block scripts %}
+        {# Filter article by name #}
+        <script>
+            selected_articles = [...document.querySelectorAll(".article")];
+            input = document.getElementById("article_filter");
+
+            input.addEventListener("input", function () {
+                let found = 0;
+                const filter = this.value.toLowerCase();
+
+                selected_articles.forEach(article => {
+                    const name = article.querySelector(".article__name").textContent.toLowerCase();
+                    if (name.indexOf(filter) === -1) {
+                        article.style.display = "none";
+                    } else {
+                        found++;
+                        article.style.display = "";
+                    }
+                });
+                console.log(found)
+            });
+        </script>
+    {% endblock %}
 {% endblock %}

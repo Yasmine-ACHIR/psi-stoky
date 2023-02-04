@@ -1,11 +1,10 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from django.urls import path
 
 from .accounts import views as accounts_views
 from .articles import views as articles_views
-
-from django.conf import settings
-from django.conf.urls.static import static
 
 urlpatterns = [
     # articles

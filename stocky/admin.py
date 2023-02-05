@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from stocky.models import Category, Supplier
+
+admin.site.register(Category)
+admin.site.register(Supplier)

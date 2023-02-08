@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'stocky.apps.StockyConfig'
+    'stocky.apps.StockyConfig',
+
 ]
 
 MIDDLEWARE = [
@@ -122,7 +123,7 @@ CONTENT_DIR = os.path.join(BASE_DIR, 'ui')
 STATIC_ROOT = os.path.join(CONTENT_DIR, 'static')
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(CONTENT_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = [

@@ -11,7 +11,3 @@ def signup(request):
             form.save()
 
     return render(request, 'pages/accounts/signup.html', {'form': form})
-
-
-def login(request):
-    form = Login

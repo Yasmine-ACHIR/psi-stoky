@@ -1,12 +1,18 @@
 @import "layout.css";
 
+:root {
+    --text-color: #111;
+    --primary-color: #13aa52;
+}
+
 *,
 *::after,
 *::before {
     margin: 0;
     padding: 0;
-    font-size: 16px;
     box-sizing: border-box;
+    color: var(--text-color);
+    font-family: "Sofia Sans", serif;
 }
 
 ul, ol {
@@ -15,4 +21,84 @@ ul, ol {
 
 a {
     text-decoration: none;
+    cursor: pointer !important;
+}
+
+a:visited {
+    color: black !important;
+}
+
+
+img {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+form {
+    margin: auto;
+    max-width: 1000px;
+    display: grid;
+    gap: 1rem;
+}
+form > p {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    padding: .5rem .2rem;
+}
+
+input[type='submit'] {
+    cursor: pointer;
+}
+
+.input__container {
+    display: flex;
+    border-radius: .4rem;
+    padding-inline: 1rem;
+}
+
+.input__container input {
+    all: unset;
+    margin-left: -1rem;
+    border-radius: 1rem;
+}
+
+.input__container legend {
+    position: relative;
+    padding-inline: 1rem;
+    font-size: 1.1rem;
+}
+
+
+.btn {
+    display: flex;
+    gap: .4rem;
+    justify-content: center;
+    align-items: center;
+    background-color: #13aa52;
+    border: 1px solid #13aa52;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, .1) 0 2px 4px 0;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.2rem;
+    padding: 10px 25px;
+}
+
+
+.btn:hover {
+    box-shadow: rgba(0, 0, 0, .15) 0 3px 9px 0;
+    transform: translateY(-2px);
+}
+
+svg {
+    fill: var(--primary-color);
+    width: 2rem;
+    height: 2rem;
+}
+
+h1 {
+    font-size: 2rem !important;
 }

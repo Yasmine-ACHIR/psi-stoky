@@ -1,0 +1,91 @@
+body {
+    background-image: url("http://www.explainconsultancy.com/wp-expcontent/uploads/nanterre.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(3px);
+    overflow: hidden;
+}
+
+main {
+    height: 100%;
+    padding: 2rem;
+    overflow: hidden;
+}
+
+footer {
+    display: none;
+}
+
+.accounts {
+    overflow: auto;
+    margin: 1% 2%;
+    background: rgba(255, 255, 255, 0.80);
+    width: min(100%, 30em);
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(99, 99, 99, 0.2) 0 2px 8px 0;
+    padding: 3rem 2rem;
+    gap: 1rem;
+    align-items: center;
+    border-radius: 1rem;
+    max-height: 100%;
+}
+
+.accounts > * {
+    width: 100%;
+}
+
+input {
+    font-size: 1.2rem;
+}
+
+.accounts input[type="submit"] {
+    background: var(--primary-color);
+}
+
+.accounts__footer {
+    text-align: center;
+}
+
+.accounts__footer a {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+nav > * {
+    display: none;
+}
+
+footer {
+    display: none !important;
+}
+
+.header__title > * {
+    color: white !important;
+}
+
+.helptext {
+    display: none;
+}
+
+::-webkit-scrollbar {
+    width: .3rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    margin: 1rem;
+    border-radius: 100%;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #aaa;
+}

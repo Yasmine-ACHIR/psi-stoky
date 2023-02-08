@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -6,11 +8,8 @@ class Category(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
 
-
-class SubCategory(models.Model):
-    name = models.CharField(max_length=255)
-    description = models.TextField()
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.name
 
 
 class Supplier(models.Model):
@@ -19,6 +18,9 @@ class Supplier(models.Model):
     phone_number = models.CharField(max_length=255)
     email = models.EmailField()
 
+    def __str__(self):
+        return self.name
+
 
 class Article(models.Model):
     name = models.CharField(max_length=255)
@@ -26,11 +28,10 @@ class Article(models.Model):
     serial_number = models.CharField(max_length=255)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.IntegerField()
-    image = models.ImageField(upload_to='articles/')
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    sub_category = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='images/articles/')
+    categories = models.ManyToManyField(Category)
     supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
-    reception_date = models.DateField()
+    reception_date = models.DateField(default=date.today)
 
 
 class Stock(models.Model):

@@ -1,5 +1,5 @@
 import pandas as pd
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
@@ -19,6 +19,7 @@ def article_details(request, article_id):
     return render(request, 'pages/articles/article_details.html', {'article': article})
 
 
+@login_required(login_url='/accounts/login/')
 def add_article(request):
     if request.method == 'POST':
         form = ArticleForm(request.POST, request.FILES)
@@ -31,6 +32,7 @@ def add_article(request):
 
 
 @login_required(login_url='/accounts/login/')
+@user_passes_test(lambda u: u.is_superuser)
 def edit_article(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)
     form = ArticleForm(request.POST or None, instance=article)
@@ -43,6 +45,7 @@ def edit_article(request, article_pk):
 
 
 @login_required(login_url='/accounts/login/')
+@user_passes_test(lambda u: u.is_superuser)
 def delete_article(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)
     article.delete()

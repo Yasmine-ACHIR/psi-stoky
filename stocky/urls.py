@@ -17,7 +17,7 @@ urlpatterns = [
     path('articles/edit/<int:article_pk>', articles_views.edit_article, name='edit_article'),
     path("export-articles/", export, name="export_articles"),
 
-                  # accounts
+    # accounts
     path('accounts/signup', accounts_views.signup, name='signup'),
     path('accounts/login/', auth_views.LoginView.as_view(template_name='pages/accounts/login.html'), name='login'),
     path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout')

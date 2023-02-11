@@ -1,4 +1,6 @@
+import pandas as pd
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
 from stocky.articles.forms import ArticleForm
@@ -8,7 +10,7 @@ from stocky.models import Article
 @login_required(login_url='/accounts/login/')
 def articles(request):
     all_articles = Article.objects.all()
-    return render(request, 'pages/articles/index.html', {'articles': all_articles})
+    return render(request, 'pages/articles/index.html', {'articles': all_articles, 'len': len(all_articles)})
 
 
 @login_required(login_url='/accounts/login/')
@@ -45,3 +47,20 @@ def delete_article(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)
     article.delete()
     return redirect('/articles')
+
+
+@login_required(login_url='/accounts/login/')
+def export(request):
+    all_articles = Article.objects.all()
+    data = {
+        "Name": [article.name for article in all_articles],
+        "Price": [article.price for article in all_articles],
+        "Quantity": [article.quantity for article in all_articles],
+        "Supplier": [article.supplier for article in all_articles],
+        "Categories": [", ".join([category.name for category in article.categories.all()]) for article in all_articles],
+    }
+    df = pd.DataFrame(data)
+    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = 'attachment; filename=articles.xlsx'
+    df.to_excel(response, index=False)
+    return response

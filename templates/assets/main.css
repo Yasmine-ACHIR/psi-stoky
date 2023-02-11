@@ -93,6 +93,10 @@ input[type='submit'] {
     transform: translateY(-2px);
 }
 
+img {
+    max-width: inherit;
+}
+
 svg {
     fill: var(--primary-color);
     width: 2rem;
